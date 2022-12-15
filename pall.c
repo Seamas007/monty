@@ -1,13 +1,21 @@
 #include "monty.h"
-
 /**
- * pall - prints the stack
- * @stack: stack given by main in start.c
- * @line_cnt: amount of lines
- *
- * Return: void
- */
-void pall(stack_t **stack, unsigned int line_cnt __attribute__((unused)))
+*pall - function to print stack's elements
+*@line_number: will not be used , we usse attribute not void
+*@stack: pointer to the head of the doubly linked list
+*Return: Nothing
+*/
+
+void pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
-	print_stack(*stack);
+stack_t *current = *stack;
+
+if (stack == NULL || *stack == NULL)
+return;
+
+while (current != NULL)
+{
+printf("%d\n", current->n);
+current = current->next;
+}
 }

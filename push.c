@@ -1,29 +1,44 @@
-#include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
 #include "monty.h"
-
+#include <string.h>
 /**
- * push - push element into the stack
- * @stack: stack given by main
- * @line_cnt: amount of lines
- *
- * Return: void
- */
-void push(stack_t **stack, unsigned int line_cnt)
+*push - add a neode in the list
+*@stack: pointer to a pointer to the doubly linked list
+*@line_number: line where there is an error
+*Return: nothing
+*/
+void push(stack_t **stack, unsigned int line_number)
 {
-        char *n = global.argument;
+	stack_t *new = NULL;
+	int i;
 
-        if ((is_digit(n)) == 0)
-        {
-                fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
-                exit(EXIT_FAILURE);
-        }
-
-        if (global.data_struct == 1)
-        {
-                if (!add_node(stack, atoi(global.argument)))
-                {
-                        exit(EXIT_FAILURE);
-                }
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	if (n == NULL)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	for (i = 0; n[i]; i++)
+	{
+		if (n[0] == '-' && i == 0)
+			continue;
+		if (n[i] < 48 || n[i] > 57)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+	}
+	new->n = atoi(n);
+	new->prev = NULL;
+	new->next = NULL;
+	if (*stack != NULL)
+	{
+		new->next = *stack;
+		(*stack)->prev = new;
+	}
+	*stack = new;
+}
