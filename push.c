@@ -6,7 +6,7 @@
 *@line_number: line where there is an error
 *Return: nothing
 */
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, char *n, unsigned int line_number)
 {
 	stack_t *new = NULL;
 	int i;
